@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BookHive</string>
+    <string name="btn_pattern">Clique Aqui</string>
 </resources>
