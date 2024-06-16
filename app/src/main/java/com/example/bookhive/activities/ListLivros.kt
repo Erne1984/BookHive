@@ -1,8 +1,10 @@
 package com.example.bookhive.activities
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +24,8 @@ class ListLivros : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_livros)
 
+        var navigateHome: Button = findViewById(R.id.navigateHome)
+
         sharedPreferences = getSharedPreferences("livros_prefs", Context.MODE_PRIVATE)
         livrosList = mutableListOf()
         livrosRecyclerView = findViewById(R.id.recyclerViewLivros)
@@ -31,6 +35,12 @@ class ListLivros : AppCompatActivity() {
         livrosRecyclerView.adapter = livrosAdapter
 
         recuperarLivros()
+
+        navigateHome.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun recuperarLivros() {
