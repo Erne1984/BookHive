@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">BookHive</string>
-    <string name="btn_pattern">Clique Aqui</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="btn_add_author">Adicionar Autor</string>
+    <string name="btn_add_book">Adicionar Livro</string>
+
+    <string name="title_add_book">Adicionar Livro</string>
+
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
