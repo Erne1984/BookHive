@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.bookhive.R
 import com.example.bookhive.objects.Autor
 import org.json.JSONArray
@@ -36,10 +37,11 @@ class AddAutoresActivity : AppCompatActivity() {
 
             if (nome.isNotEmpty() && nacionalidade.isNotEmpty() && dataNascimento.isNotEmpty()) {
                 val autor = Autor(nome, nacionalidade, dataNascimento, biografia)
+                exibirToast("Livro adicionado com sucesso!")
                 salvarAutor(autor)
                 finish()
             } else {
-                // Implemente algum feedback para o usuário sobre campos faltantes
+                exibirToast("Por favor, preencha todos os campos!")
             }
         }
     }
@@ -55,5 +57,9 @@ class AddAutoresActivity : AppCompatActivity() {
         editor.apply()
 
         Log.d("AddAutoresActivity", "Autor adicionado: $autor")
+    }
+
+    private fun exibirToast(mensagem: String) {
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
     }
 }

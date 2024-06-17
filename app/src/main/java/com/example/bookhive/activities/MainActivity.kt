@@ -15,12 +15,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnNavigateAddAuthor: Button = findViewById(R.id.navigate_add_author)
+        val btnNavigateListAuthor: Button = findViewById(R.id.navigate_list_autores)
 
         val btnNavigateAddBook: Button = findViewById(R.id.navigate_add_book)
         val btnNavigateListLivros: Button = findViewById(R.id.navigate_list_livros)
 
         btnNavigateAddAuthor.setOnClickListener{
             val intent = Intent(this, AddAutoresActivity::class.java)
+            startActivity(intent)
+        }
+        btnNavigateListAuthor.setOnClickListener{
+            val intent = Intent(this, ListAutoresActivity::class.java)
             startActivity(intent)
         }
 
