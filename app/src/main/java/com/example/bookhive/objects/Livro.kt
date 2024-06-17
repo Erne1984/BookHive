@@ -3,11 +3,11 @@ package com.example.bookhive.objects
 import org.json.JSONObject
 
 data class Livro(
-    val title: String,
-    val author: String,
-    val anoPubli: String,
-    val genero: String,
-    val sinopse: String
+    var title: String,
+    var author: String,
+    var anoPubli: String,
+    var genero: String,
+    var sinopse: String
 ) {
     fun toJsonString(): String {
         val jsonObject = JSONObject()

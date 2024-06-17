@@ -1,6 +1,7 @@
 package com.example.bookhive.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookhive.R
+import com.example.bookhive.activities.EditLivroActivity
+import com.example.bookhive.activities.ListLivros
+import com.example.bookhive.activities.ListLivros.Companion.EDIT_LIVRO_REQUEST_CODE
 import com.example.bookhive.objects.Livro
 import org.json.JSONArray
 
@@ -28,6 +32,17 @@ class LivrosAdapter(private val context: Context, private val livros: MutableLis
         holder.btnDelete.setOnClickListener {
             deleteLivro(position)
         }
+
+        holder.btnEdit.setOnClickListener {
+            val intent = Intent(context, EditLivroActivity::class.java)
+            intent.putExtra("livro_id", position)
+            intent.putExtra("livro_titulo", livro.title)
+            intent.putExtra("livro_autor", livro.author)
+            intent.putExtra("livro_anoPubli", livro.anoPubli)
+            intent.putExtra("livro_genero", livro.genero)
+            intent.putExtra("livro_sinopse", livro.sinopse)
+            (context as ListLivros).startActivityForResult(intent, EDIT_LIVRO_REQUEST_CODE)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +53,7 @@ class LivrosAdapter(private val context: Context, private val livros: MutableLis
         private val txtTitulo: TextView = itemView.findViewById(R.id.txtTitulo)
         private val txtAutor: TextView = itemView.findViewById(R.id.txtAutor)
         val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
-
+        val btnEdit: ImageButton = itemView.findViewById(R.id.btnEdit)
         fun bind(livro: Livro) {
             txtTitulo.text = livro.title
             txtAutor.text = livro.author

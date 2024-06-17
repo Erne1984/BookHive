@@ -16,6 +16,8 @@
             android:name=".activities.ListLivros"
             android:exported="false" />
         <activity
+            android:name=".activities.EditLivroActivity" />
+        <activity
             android:name=".activities.LivrosActivity"
             android:exported="false" />
         <activity

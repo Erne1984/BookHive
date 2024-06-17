@@ -1,5 +1,6 @@
 package com.example.bookhive.activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,6 +20,10 @@ class ListLivros : AppCompatActivity() {
     private lateinit var livrosList: MutableList<Livro>
     private lateinit var livrosRecyclerView: RecyclerView
     private lateinit var livrosAdapter: LivrosAdapter
+
+    companion object {
+        const val EDIT_LIVRO_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,5 +57,40 @@ class ListLivros : AppCompatActivity() {
             livrosList.add(livro)
         }
         livrosAdapter.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_LIVRO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val livroId = it.getIntExtra("livro_id", -1)
+                val titulo = it.getStringExtra("livro_titulo") ?: ""
+                val autor = it.getStringExtra("livro_autor") ?: ""
+                val anoPubli = it.getStringExtra("livro_anoPubli") ?: ""
+                val genero = it.getStringExtra("livro_genero") ?: ""
+                val sinopse = it.getStringExtra("livro_sinopse") ?: ""
+
+                if (livroId != -1) {
+                    val livro = livrosList[livroId]
+                    livro.title = titulo
+                    livro.author = autor
+                    livro.anoPubli = anoPubli
+                    livro.genero = genero
+                    livro.sinopse = sinopse
+                    livrosAdapter.notifyItemChanged(livroId)
+                    saveLivros()
+                }
+            }
+        }
+    }
+
+    private fun saveLivros() {
+        val editor = sharedPreferences.edit()
+        val jsonArray = JSONArray()
+        for (livro in livrosList) {
+            jsonArray.put(livro.toJsonString())
+        }
+        editor.putString("livros", jsonArray.toString())
+        editor.apply()
     }
 }
