@@ -24,19 +24,19 @@ class ListLivros : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_livros)
 
-        var navigateHome: Button = findViewById(R.id.navigateHome)
+        val navigateHome: Button = findViewById(R.id.navigateHome)
 
         sharedPreferences = getSharedPreferences("livros_prefs", Context.MODE_PRIVATE)
         livrosList = mutableListOf()
         livrosRecyclerView = findViewById(R.id.recyclerViewLivros)
-        livrosAdapter = LivrosAdapter(livrosList)
+        livrosAdapter = LivrosAdapter(this, livrosList)
 
         livrosRecyclerView.layoutManager = LinearLayoutManager(this)
         livrosRecyclerView.adapter = livrosAdapter
 
         recuperarLivros()
 
-        navigateHome.setOnClickListener{
+        navigateHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
