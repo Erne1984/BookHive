@@ -30,6 +30,13 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="Delete"
-        android:icon="@drawable/ic_delete" />
+        android:src="@drawable/ic_delete" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Editar"
+        android:src="@drawable/ic_edit" />
 
 </LinearLayout>
