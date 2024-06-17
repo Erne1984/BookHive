@@ -13,12 +13,20 @@
         android:theme="@style/Theme.BookHive"
         tools:targetApi="31">
         <activity
-            android:name=".activities.ListLivros"
+            android:name=".activities.ListAutoresActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.EditLivroActivity" />
+            android:name=".activities.EditAutoresActivity"
+            android:exported="false" />
         <activity
-            android:name=".activities.LivrosActivity"
+            android:name=".activities.AddAutoresActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ListLivros"
+            android:exported="false" />
+        <activity android:name=".activities.EditLivroActivity" />
+        <activity
+            android:name=".activities.AddLivrosActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddLivrosActivity">
+    tools:context=".activities.AddAutoresActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="@string/title_add_book"
+        android:text="Adicionar Autor"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edit_book_title"
+        android:id="@+id/edit_author_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:ems="10"
-        android:hint="Título do Livro"
+        android:hint="Nome do Autor"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,72 +35,59 @@
         android:layout_marginTop="16dp"/>
 
     <EditText
-        android:id="@+id/edit_book_author"
+        android:id="@+id/edit_nationality_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:ems="10"
-        android:hint="Autor"
+        android:hint="Nacionalidade"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_book_title"
+        app:layout_constraintTop_toBottomOf="@id/edit_author_name"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"/>
 
     <EditText
-        android:id="@+id/edit_ano_publi"
+        android:id="@+id/edit_birthday_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:ems="10"
-        android:hint="Ano Publicação"
+        android:hint="Data do Nascimento"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_book_author"
+        app:layout_constraintTop_toBottomOf="@id/edit_nationality_author"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"/>
 
     <EditText
-        android:id="@+id/edit_book_genero"
+        android:id="@+id/edit_biography_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:ems="10"
-        android:hint="Gênero"
+        android:hint="Biografia"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_ano_publi"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"/>
-
-    <EditText
-        android:id="@+id/edit_book_sinopse"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:ems="10"
-        android:hint="Sinopse"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_book_genero"
+        app:layout_constraintTop_toBottomOf="@id/edit_birthday_author"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"/>
 
     <Button
-        android:id="@+id/btnAddBook"
+        android:id="@+id/btnAddAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_add_book"
+        android:layout_marginBottom="284dp"
+        android:text="Adicionar Autor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_book_sinopse" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import com.example.bookhive.R
 import com.example.bookhive.objects.Livro
 import org.json.JSONArray
 
-class LivrosActivity : AppCompatActivity() {
+class AddLivrosActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
