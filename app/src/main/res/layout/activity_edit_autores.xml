@@ -6,4 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".activities.EditAutoresActivity">
 
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editNacionalidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nacionalidade"
+        app:layout_constraintTop_toBottomOf="@+id/editNome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editDataNascimento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Data de Nascimento"
+        app:layout_constraintTop_toBottomOf="@+id/editNacionalidade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editBiografia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Biografia"
+        app:layout_constraintTop_toBottomOf="@+id/editDataNascimento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        app:layout_constraintTop_toBottomOf="@+id/editBiografia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

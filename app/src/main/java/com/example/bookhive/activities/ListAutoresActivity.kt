@@ -1,7 +1,11 @@
 package com.example.bookhive.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookhive.R
@@ -11,14 +15,20 @@ import org.json.JSONArray
 
 class ListAutoresActivity : AppCompatActivity() {
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var autoresList: MutableList<Autor>
     private lateinit var autoresRecyclerView: RecyclerView
     private lateinit var autoresAdapter: AutoresAdapter
+
+    companion object {
+        const val EDIT_AUTOR_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_autores)
 
+        sharedPreferences = getSharedPreferences("autores_prefs", Context.MODE_PRIVATE)
         autoresList = mutableListOf()
         autoresRecyclerView = findViewById(R.id.recyclerViewAutores)
         autoresAdapter = AutoresAdapter(this, autoresList)
@@ -30,7 +40,6 @@ class ListAutoresActivity : AppCompatActivity() {
     }
 
     private fun recuperarAutores() {
-        val sharedPreferences = getSharedPreferences("autores_prefs", MODE_PRIVATE)
         val jsonArrayString = sharedPreferences.getString("autores", "[]")
         val jsonArray = JSONArray(jsonArrayString)
         for (i in 0 until jsonArray.length()) {
@@ -39,5 +48,39 @@ class ListAutoresActivity : AppCompatActivity() {
             autoresList.add(autor)
         }
         autoresAdapter.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_AUTOR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val autorId = it.getIntExtra("autor_id", -1)
+                val nome = it.getStringExtra("autor_nome") ?: ""
+                val nacionalidade = it.getStringExtra("autor_nacionalidade") ?: ""
+                val dataNascimento = it.getStringExtra("autor_dataNascimento") ?: ""
+                val biografia = it.getStringExtra("autor_biografia") ?: ""
+
+                if (autorId != -1) {
+                    val autor = autoresList[autorId]
+                    autor.nome = nome
+                    autor.nacionalidade = nacionalidade
+                    autor.dataNascimento = dataNascimento
+                    autor.biografia = biografia
+                    autoresAdapter.notifyItemChanged(autorId)
+                    saveAutores()
+                }
+            }
+        }
+    }
+
+
+    private fun saveAutores() {
+        val editor = sharedPreferences.edit()
+        val jsonArray = JSONArray()
+        for (autor in autoresList) {
+            jsonArray.put(autor.toJsonString())
+        }
+        editor.putString("autores", jsonArray.toString())
+        editor.apply()
     }
 }
