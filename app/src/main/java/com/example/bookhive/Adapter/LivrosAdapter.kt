@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookhive.R
 import com.example.bookhive.activities.EditLivroActivity
@@ -64,6 +65,8 @@ class LivrosAdapter(private val context: Context, private val livros: MutableLis
         livros.removeAt(position)
         notifyItemRemoved(position)
         saveLivros()
+        notifyItemRangeChanged(position, livros.size) 
+        Toast.makeText(context, "Livro removido com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     private fun saveLivros() {

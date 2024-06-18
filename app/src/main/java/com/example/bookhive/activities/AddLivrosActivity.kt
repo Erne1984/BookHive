@@ -32,27 +32,55 @@ class AddLivrosActivity : AppCompatActivity() {
         val btnAddBook: Button = findViewById(R.id.btnAddBook)
 
         btnAddBook.setOnClickListener {
-            val title = editTitleBook.text.toString()
-            val author = editAuthorBook.text.toString()
-            val anoPubli = editAnoPubli.text.toString()
-            val genero = editGenero.text.toString()
-            val sinopse = editBookSinopse.text.toString()
+            val title = editTitleBook.text.toString().trim()
+            val author = editAuthorBook.text.toString().trim()
+            val anoPubli = editAnoPubli.text.toString().trim()
+            val genero = editGenero.text.toString().trim()
+            val sinopse = editBookSinopse.text.toString().trim()
 
-            if (title.isEmpty() || author.isEmpty() || anoPubli.isEmpty() || genero.isEmpty() || sinopse.isEmpty()) {
-                exibirToast("Por favor, preencha todos os campos!")
-                return@setOnClickListener
+            val validationMessage = validateFields(title, author, anoPubli, genero, sinopse)
+
+            if (validationMessage.isEmpty()) {
+                val livro = Livro(title, author, anoPubli, genero, sinopse)
+                salvarLivro(livro)
+                exibirToast("Livro adicionado com sucesso!")
+                recuperarLivros()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                exibirToast(validationMessage)
             }
-
-            val livro = Livro(title, author, anoPubli, genero, sinopse)
-
-            salvarLivro(livro)
-            exibirToast("Livro adicionado com sucesso!")
-            recuperarLivros()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
         }
+    }
+
+    private fun validateFields(title: String, author: String, anoPubli: String, genero: String, sinopse: String): String {
+        val errorMessages = mutableListOf<String>()
+
+        if (title.isEmpty()) {
+            errorMessages.add("Título do livro é obrigatório.")
+        }
+
+        if (author.isEmpty()) {
+            errorMessages.add("Autor do livro é obrigatório.")
+        }
+
+        if (anoPubli.isEmpty()) {
+            errorMessages.add("Ano de publicação é obrigatório.")
+        } else if (!anoPubli.matches(Regex("\\d{4}"))) {
+            errorMessages.add("Ano de publicação deve ser um ano válido (ex: 2022).")
+        }
+
+        if (genero.isEmpty()) {
+            errorMessages.add("Gênero do livro é obrigatório.")
+        }
+
+        if (sinopse.isEmpty()) {
+            errorMessages.add("Sinopse do livro é obrigatória.")
+        }
+
+        return errorMessages.joinToString("\n")
     }
 
     private fun salvarLivro(livro: Livro) {

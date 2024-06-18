@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,8 @@ class ListAutoresActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_autores)
 
+        val navigateHomeAuthor: Button = findViewById(R.id.navigateHomeAutores)
+
         sharedPreferences = getSharedPreferences("autores_prefs", Context.MODE_PRIVATE)
         autoresList = mutableListOf()
         autoresRecyclerView = findViewById(R.id.recyclerViewAutores)
@@ -37,6 +40,12 @@ class ListAutoresActivity : AppCompatActivity() {
         autoresRecyclerView.adapter = autoresAdapter
 
         recuperarAutores()
+
+        navigateHomeAuthor.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun recuperarAutores() {

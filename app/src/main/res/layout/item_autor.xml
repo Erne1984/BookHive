@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@android:drawable/ic_menu_edit"/>
+        android:src="@drawable/ic_edit"/>
 
     <ImageButton
         android:id="@+id/btnDelete"
@@ -37,5 +37,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@android:drawable/ic_menu_delete"/>
+        android:src="@drawable/ic_delete"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,11 @@ package com.example.bookhive.activities
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bookhive.R
 import com.example.bookhive.objects.Autor
 import org.json.JSONArray
@@ -35,15 +34,35 @@ class AddAutoresActivity : AppCompatActivity() {
             val dataNascimento = editBirthdayAuthor.text.toString().trim()
             val biografia = editBiographyAuthor.text.toString().trim()
 
-            if (nome.isNotEmpty() && nacionalidade.isNotEmpty() && dataNascimento.isNotEmpty()) {
+            val validationMessage = validateFields(nome, nacionalidade, dataNascimento)
+
+            if (validationMessage.isEmpty()) {
                 val autor = Autor(nome, nacionalidade, dataNascimento, biografia)
-                exibirToast("Livro adicionado com sucesso!")
+                exibirToast("Autor adicionado com sucesso!")
                 salvarAutor(autor)
                 finish()
             } else {
-                exibirToast("Por favor, preencha todos os campos!")
+                exibirToast(validationMessage)
             }
         }
+    }
+
+    private fun validateFields(nome: String, nacionalidade: String, dataNascimento: String): String {
+        val errorMessages = mutableListOf<String>()
+
+        if (nome.isEmpty()) {
+            errorMessages.add("Nome do autor é obrigatório.")
+        }
+
+        if (nacionalidade.isEmpty()) {
+            errorMessages.add("Nacionalidade do autor é obrigatória.")
+        }
+
+        if (dataNascimento.isEmpty()) {
+            errorMessages.add("Data de nascimento do autor é obrigatória.")
+        }
+
+        return errorMessages.joinToString("\n")
     }
 
     private fun salvarAutor(autor: Autor) {
@@ -55,8 +74,6 @@ class AddAutoresActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("autores", jsonArray.toString())
         editor.apply()
-
-        Log.d("AddAutoresActivity", "Autor adicionado: $autor")
     }
 
     private fun exibirToast(mensagem: String) {

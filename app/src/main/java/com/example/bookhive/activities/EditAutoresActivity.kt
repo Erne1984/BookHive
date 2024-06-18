@@ -38,14 +38,52 @@ class EditAutoresActivity : AppCompatActivity() {
         editBiografia.setText(biografia)
 
         btnSave.setOnClickListener {
-            val resultIntent = Intent()
-            resultIntent.putExtra("autor_id", autorId)
-            resultIntent.putExtra("autor_nome", editNome.text.toString())
-            resultIntent.putExtra("autor_nacionalidade", editNacionalidade.text.toString())
-            resultIntent.putExtra("autor_dataNascimento", editDataNascimento.text.toString())
-            resultIntent.putExtra("autor_biografia", editBiografia.text.toString())
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+            val nome = editNome.text.toString().trim()
+            val nacionalidade = editNacionalidade.text.toString().trim()
+            val dataNascimento = editDataNascimento.text.toString().trim()
+            val biografia = editBiografia.text.toString().trim()
+
+            val isValid = validateInputs(nome, nacionalidade, dataNascimento, biografia)
+
+            if (isValid) {
+                val resultIntent = Intent()
+                resultIntent.putExtra("autor_id", autorId)
+                resultIntent.putExtra("autor_nome", nome)
+                resultIntent.putExtra("autor_nacionalidade", nacionalidade)
+                resultIntent.putExtra("autor_dataNascimento", dataNascimento)
+                resultIntent.putExtra("autor_biografia", biografia)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            }
         }
+    }
+
+    private fun validateInputs(nome: String, nacionalidade: String, dataNascimento: String, biografia: String): Boolean {
+        var isValid = true
+
+        if (nome.isEmpty()) {
+            editNome.error = "Nome é obrigatório"
+            isValid = false
+        }
+
+        if (nacionalidade.isEmpty()) {
+            editNacionalidade.error = "Nacionalidade é obrigatória"
+            isValid = false
+        }
+
+        if (dataNascimento.isEmpty()) {
+            editDataNascimento.error = "Data de Nascimento é obrigatória"
+            isValid = false
+        } else if (!dataNascimento.matches(Regex("\\d{2}/\\d{2}/\\d{4}"))) {
+            editDataNascimento.error = "Formato de data deve ser DD/MM/AAAA"
+            isValid = false
+        }
+
+        if (biografia.isEmpty()) {
+            editBiografia.error = "Biografia é obrigatória"
+            isValid = false
+        }
+
+        return isValid
     }
 }
