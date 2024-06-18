@@ -1,6 +1,7 @@
 package com.example.bookhive.activities
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -28,6 +29,8 @@ class AddAutoresActivity : AppCompatActivity() {
         val editBiographyAuthor = findViewById<EditText>(R.id.edit_biography_author)
         val btnAddAuthor = findViewById<Button>(R.id.btnAddAuthor)
 
+        val navigateHomeAddAuthor: Button = findViewById(R.id.navigateHomeAddAuthor)
+
         btnAddAuthor.setOnClickListener {
             val nome = editAuthorName.text.toString().trim()
             val nacionalidade = editNationalityAuthor.text.toString().trim()
@@ -44,6 +47,12 @@ class AddAutoresActivity : AppCompatActivity() {
             } else {
                 exibirToast(validationMessage)
             }
+        }
+
+        navigateHomeAddAuthor.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

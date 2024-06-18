@@ -32,6 +32,8 @@ class EditAutoresActivity : AppCompatActivity() {
         val dataNascimento = intent.getStringExtra("autor_dataNascimento")
         val biografia = intent.getStringExtra("autor_biografia")
 
+        val navigateListAuthor: Button = findViewById(R.id.navigateListAuthor)
+
         editNome.setText(nome)
         editNacionalidade.setText(nacionalidade)
         editDataNascimento.setText(dataNascimento)
@@ -55,6 +57,12 @@ class EditAutoresActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
             }
+        }
+
+        navigateListAuthor.setOnClickListener{
+            val intent = Intent(this, ListAutoresActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

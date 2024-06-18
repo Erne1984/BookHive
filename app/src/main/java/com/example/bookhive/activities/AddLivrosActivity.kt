@@ -31,6 +31,8 @@ class AddLivrosActivity : AppCompatActivity() {
 
         val btnAddBook: Button = findViewById(R.id.btnAddBook)
 
+        val navigateHomeAddBook: Button = findViewById(R.id.navigateHomeAddBook)
+
         btnAddBook.setOnClickListener {
             val title = editTitleBook.text.toString().trim()
             val author = editAuthorBook.text.toString().trim()
@@ -52,6 +54,12 @@ class AddLivrosActivity : AppCompatActivity() {
             } else {
                 exibirToast(validationMessage)
             }
+        }
+
+        navigateHomeAddBook.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
